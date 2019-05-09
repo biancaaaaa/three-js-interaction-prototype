@@ -13,10 +13,13 @@ class ThreeScene {
         this.initCamera(width, height);
         this.initLight();
         this.initCube(color);
+        this.initPlane();
         this.initRenderer(width, height);
 
         this.renderToDOM(domElem);
         this.renderer.render(this.scene, this.camera);
+        console.log(this.camera);
+        // this.animate();
     }
 
     initLight() {
@@ -48,7 +51,7 @@ class ThreeScene {
             NEAR = 0.1,
             FAR = 2000;
         this.camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
-        this.camera.position.z = 5;
+         this.camera.position.z = 5;
     }
 
     initCube(color) {
@@ -58,11 +61,44 @@ class ThreeScene {
         this.scene.add(this.cube);
     }
 
+    initPlane() {
+        //increase the steps to make squares bigger. must be divisible by the size
+        const size = 20,
+            steps = 2;
+
+        const geometry = new THREE.Geometry();
+        const material = new THREE.LineBasicMaterial({
+            color: 'teal'
+        });
+
+        for (let i = -size; i <= size; i += steps) {
+            //draw lines one way
+            geometry.vertices.push(new THREE.Vector3(-size, -0.04, i));
+            geometry.vertices.push(new THREE.Vector3(size, -0.04, i));
+
+            //draw lines the other way
+            geometry.vertices.push(new THREE.Vector3(i, -0.04, -size));
+            geometry.vertices.push(new THREE.Vector3(i, -0.04, size));
+        }
+
+        //THREE.LinePieces prevents connecting of vertices
+        const plane = new THREE.Line(geometry, material, THREE.LinePieces);
+
+        this.scene.add(plane);
+    }
+
     animate = () => {
         requestAnimationFrame(this.animate);
+        const speed = Date.now() * 0.0005;
 
-        this.cube.rotation.x += 0.1;
-        this.cube.rotation.y += 0.1;
+        // this.cube.rotation.x += 0.1;
+        // this.cube.rotation.y += 0.1;
+
+        this.camera.position.x = Math.sin(speed) * 10;
+        this.camera.position.z = Math.cos(speed) * 10;
+        console.log('y', this.camera.position.x);
+        console.log('z', this.camera.position.z);
+        this.camera.lookAt(this.scene.position);
 
         this.renderer.render(this.scene, this.camera);
     };
@@ -80,9 +116,50 @@ class ThreeScene {
     }
 
     panCamera(lng, lat) {
-        this.camera.position.x += lng/1000;
-        this.camera.position.y += lat/1000;
+        this.camera.position.x += lng / 1000;
+        this.camera.position.y += lat / 1000;
         console.log('x', this.camera.position.x);
+        this.renderer.render(this.scene, this.camera);
+    }
+
+    setView(dir) {
+        // this.camera.position.y += 0.01;
+        // TOP: z = 0, y = 10
+        // BOTTOM: z = 0, y = -10
+        // LEFT: z = 0, y = 10
+        // RIGHT: z = 0, y = -10
+        // FRONT: z = 0, y = 0
+        switch(dir) {
+            case 'top':
+                this.camera.position.z = 0;
+                this.camera.position.x = 0;
+                this.camera.position.y = 10;
+                break;
+            case 'bottom':
+                this.camera.position.z = 0;
+                this.camera.position.x = 0;
+                this.camera.position.y = -10;
+                break;
+            case 'left':
+                this.camera.position.z = 0;
+                this.camera.position.y = 0;
+                this.camera.position.x = -10;
+                break;
+            case 'right':
+                this.camera.position.z = 0;
+                this.camera.position.y = 0;
+                this.camera.position.x = 10;
+                break;
+            case 'front':
+                this.camera.position.z = 5;
+                this.camera.position.y = 0;
+                this.camera.position.x = 0;
+                break;
+        }
+
+
+        //this.camera.top = new THREE.Vector3(0,0,1);
+        this.camera.lookAt(this.scene.position);
         this.renderer.render(this.scene, this.camera);
     }
 }

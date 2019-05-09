@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Prototype</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
 
@@ -16,15 +18,29 @@
         <input type="checkbox" id="mode-switch">
         <span class="slider round"></span>
     </label>
-    <button id="top">Top</button>
-    <button id="bottom">Bottom</button>
-    <button id="left">Left</button>
-    <button id="right">Right</button>
+
+</div>
+<div class="controls">
+    <i id="arrow-down" class="control fas fa-arrow-alt-circle-down"></i>
+    <i id="arrow-up" class="control fas fa-arrow-alt-circle-up"></i>
+    <i id="arrow-left" class="control fas fa-arrow-alt-circle-left"></i>
+    <i id="arrow-right" class="control fas fa-arrow-alt-circle-right"></i>
+    <div class="scene">
+        <div class="cube">
+            <div id="front" class="cube__face cube__face--front">front</div>
+            <div id="back" class="cube__face cube__face--back">back</div>
+            <div id="right" class="cube__face cube__face--right">right</div>
+            <div id="left" class="cube__face cube__face--left">left</div>
+            <div id="top" class="cube__face cube__face--top">top</div>
+            <div id="bottom" class="cube__face cube__face--bottom">bottom</div>
+        </div>
+    </div>
 </div>
 
 
 <script type="text/javascript" src="js/three.min.js"></script>
 <script type="text/javascript" src="js/three-scene.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/orientation-cube.js"></script>
 </body>
 </html>

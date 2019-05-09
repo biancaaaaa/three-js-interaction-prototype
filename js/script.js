@@ -3,6 +3,12 @@ let cameraMode = false;
 const modeSwitch = document.querySelector('#mode-switch');
 const container = document.querySelector('#container');
 
+// nav buttons
+const topBtn = document.querySelector('#top');
+const bottomBtn = document.querySelector('#bottom');
+const leftBtn = document.querySelector('#left');
+const rightBtn = document.querySelector('#right');
+
 const newScene = new ThreeScene(0xFF0000, container,
     window.innerWidth - 10, window.innerHeight - 10);
 
@@ -14,10 +20,23 @@ let distance = {
 };
 let prevPos;
 
-// Global vars for pointer events
-let evCache = [];
-let prevDiff = -1;
-let prevPoint;
+let counter = 0;
+topBtn.addEventListener('click', () => {
+    console.log('set');
+    newScene.setView('top');
+});
+bottomBtn.addEventListener('click', () => {
+    console.log('set');
+    newScene.setView('bottom');
+});
+leftBtn.addEventListener('click', () => {
+    console.log('set');
+    newScene.setView('left');
+});
+rightBtn.addEventListener('click', () => {
+    console.log('set');
+    newScene.setView('right');
+});
 
 addObjectTouchEventListeners();
 
