@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e2b61162-dd2a-4a02-ae87-1971c4b0e393" name="Hetzner" url="http://s1610456011.student.kwmhgb.at">
+        <fileTransfer host="s1610456011.student.kwmhgb.at" port="21" rootFolder="/public_html/prototype">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
