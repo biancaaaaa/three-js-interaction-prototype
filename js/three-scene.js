@@ -6,6 +6,7 @@ class ThreeScene {
     scene;
     cube;
     lights = [];
+    animationInterval;
 
     constructor(color, domElem, width, height) {
         this.scene = new THREE.Scene();
@@ -51,7 +52,7 @@ class ThreeScene {
             NEAR = 0.1,
             FAR = 2000;
         this.camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
-         this.camera.position.z = 5;
+        this.camera.position.z = 5;
     }
 
     initCube(color) {
@@ -122,45 +123,77 @@ class ThreeScene {
         this.renderer.render(this.scene, this.camera);
     }
 
+    moveCamera(endPos, startPos) {
+        // console.log(startPos);
+        console.log(this.camera.position);
+        if (this.equalsEndPosition(endPos))
+            clearInterval(this.animationInterval);
+        else {
+            // console.log(this.camera.position);
+            this.changePos('x', startPos, endPos);
+            this.changePos('y', startPos, endPos);
+            this.changePos('z', startPos, endPos);
+            this.camera.lookAt(this.scene.position);
+            this.renderer.render(this.scene, this.camera);
+        }
+    }
+
+    changePos(coord, startPos, endPos) {
+        if (!this.equalsEndCoord(coord, startPos, endPos)) {
+            if (this.isSmallerEnd(coord, startPos, endPos)) {
+                if (this.camera.position[coord] < endPos[coord])
+                    this.camera.position[coord] = Number(this.camera.position[coord].toFixed(1)) + 0.1;
+            } else {
+                if (this.camera.position[coord] > endPos[coord])
+                    this.camera.position[coord] = Number(this.camera.position[coord].toFixed(1)) - 0.1;
+            }
+        }
+    }
+
+    equalsEndCoord(coord, startPos, endPos) {
+        return startPos[coord] === endPos[coord];
+    }
+
+    isSmallerEnd(coord, startPos, endPos) {
+        return startPos[coord] < endPos[coord];
+    }
+
+    equalsEndPosition(endPos) {
+        return endPos.x === this.camera.position.x &&
+            endPos.y === this.camera.position.y &&
+            endPos.z === this.camera.position.z;
+    }
+
     setView(dir) {
-        // this.camera.position.y += 0.01;
-        // TOP: z = 0, y = 10
-        // BOTTOM: z = 0, y = -10
-        // LEFT: z = 0, y = 10
-        // RIGHT: z = 0, y = -10
-        // FRONT: z = 0, y = 0
-        switch(dir) {
+        let endPos;
+
+        switch (dir) {
             case 'top':
-                this.camera.position.z = 0;
-                this.camera.position.x = 0;
-                this.camera.position.y = 10;
+                endPos = {x: 0, y: 10, z: 0};
                 break;
             case 'bottom':
-                this.camera.position.z = 0;
-                this.camera.position.x = 0;
-                this.camera.position.y = -10;
+                endPos = {x: 0, y: -10, z: 0};
                 break;
             case 'left':
-                this.camera.position.z = 0;
-                this.camera.position.y = 0;
-                this.camera.position.x = -10;
+                endPos = {x: -10, y: 0, z: 0};
                 break;
             case 'right':
-                this.camera.position.z = 0;
-                this.camera.position.y = 0;
-                this.camera.position.x = 10;
+                endPos = {x: 10, y: 0, z: 0};
                 break;
             case 'front':
-                this.camera.position.z = 5;
-                this.camera.position.y = 0;
-                this.camera.position.x = 0;
+                endPos = {x: 0, y: 0, z: 5};
+                break;
+            default:
+                endPos = {x: 0, y: 0, z: 5};
                 break;
         }
 
+        // console.log(endPos);
+        const startPos = {...this.camera.position};
 
-        //this.camera.top = new THREE.Vector3(0,0,1);
-        this.camera.lookAt(this.scene.position);
-        this.renderer.render(this.scene, this.camera);
+        this.animationInterval = setInterval(() =>
+            this.moveCamera(endPos, startPos), 10);
+
     }
 }
 
