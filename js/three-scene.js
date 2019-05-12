@@ -1,5 +1,3 @@
-// import * as THREE from "./three";
-
 class ThreeScene {
     camera;
     renderer;
@@ -7,6 +5,11 @@ class ThreeScene {
     cube;
     lights = [];
     animationInterval;
+    orbitControls;
+    transformControls;
+    transformMode = false;
+    domEvents;
+    mixers = [];
 
     constructor(color, domElem, width, height) {
         this.scene = new THREE.Scene();
@@ -16,11 +19,57 @@ class ThreeScene {
         this.initCube(color);
         this.initPlane();
         this.initRenderer(width, height);
-
+        this.initDOMEvents();
+        this.initEventListeners();
+        this.initOrbitController();
+        this.initTransformController();
         this.renderToDOM(domElem);
         this.renderer.render(this.scene, this.camera);
-        console.log(this.camera);
-        // this.animate();
+        // events
+        // THREEx.WindowResize(this.renderer, this.camera);
+        this.animate();
+    }
+
+    initEventListeners() {
+        this.domEvents.addEventListener(this.cube, 'mouseover', () => {
+            this.cube.material.color.set(0xa90202);
+        });
+
+        this.domEvents.addEventListener(this.cube, 'mouseout', () => {
+            this.cube.material.color.set(0xFF0000);
+        });
+
+        this.domEvents.addEventListener(this.cube, 'mousedown', this.switchToRotationMode);
+        this.domEvents.addEventListener(this.cube, 'touchstart', this.switchToRotationMode);
+    }
+
+    switchToRotationMode() {
+        if (this.transformMode)
+            this.transformControls.detach(this.cube);
+        else
+            this.transformControls.attach(this.cube);
+
+        this.transformMode = !this.transformMode;
+        console.log('hi');
+    }
+
+    initDOMEvents() {
+        this.domEvents = new THREEx.DomEvents(this.camera, this.renderer.domElement);
+    }
+
+    initOrbitController() {
+        this.orbitControls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+    }
+
+    initTransformController() {
+        this.transformControls = new THREE.TransformControls(this.camera, this.renderer.domElement);
+        this.transformControls.addEventListener('change', () =>
+            this.renderer.render(this.scene, this.camera));
+        this.transformControls.setMode('rotate');
+        this.transformControls.addEventListener('dragging-changed', event => {
+            this.orbitControls.enabled = !event.value;
+        });
+        this.scene.add(this.transformControls);
     }
 
     initLight() {
@@ -63,44 +112,23 @@ class ThreeScene {
     }
 
     initPlane() {
-        //increase the steps to make squares bigger. must be divisible by the size
-        const size = 20,
-            steps = 2;
-
-        const geometry = new THREE.Geometry();
-        const material = new THREE.LineBasicMaterial({
-            color: 'teal'
-        });
-
-        for (let i = -size; i <= size; i += steps) {
-            //draw lines one way
-            geometry.vertices.push(new THREE.Vector3(-size, -0.04, i));
-            geometry.vertices.push(new THREE.Vector3(size, -0.04, i));
-
-            //draw lines the other way
-            geometry.vertices.push(new THREE.Vector3(i, -0.04, -size));
-            geometry.vertices.push(new THREE.Vector3(i, -0.04, size));
-        }
-
-        //THREE.LinePieces prevents connecting of vertices
-        const plane = new THREE.Line(geometry, material, THREE.LinePieces);
-
-        this.scene.add(plane);
+        this.scene.add(new THREE.GridHelper(10, 20));
     }
 
     animate = () => {
         requestAnimationFrame(this.animate);
-        const speed = Date.now() * 0.0005;
+        // console.log(this.camera.position);
+        //const speed = Date.now() * 0.0005;
 
         // this.cube.rotation.x += 0.1;
         // this.cube.rotation.y += 0.1;
 
-        this.camera.position.x = Math.sin(speed) * 10;
-        this.camera.position.z = Math.cos(speed) * 10;
-        console.log('y', this.camera.position.x);
-        console.log('z', this.camera.position.z);
-        this.camera.lookAt(this.scene.position);
-
+        //this.camera.position.x = Math.sin(speed) * 10;
+        //this.camera.position.z = Math.cos(speed) * 10;
+        //console.log('y', this.camera.position.x);
+        //console.log('z', this.camera.position.z);
+        //this.camera.lookAt(this.scene.position);
+        this.orbitControls.update();
         this.renderer.render(this.scene, this.camera);
     };
 
@@ -111,24 +139,13 @@ class ThreeScene {
         this.renderer.render(this.scene, this.camera);
     }
 
-    zoomCamera(value) {
-        this.camera.position.z *= value;
-        this.renderer.render(this.scene, this.camera);
-    }
-
-    panCamera(lng, lat) {
-        this.camera.position.x += lng / 1000;
-        this.camera.position.y += lat / 1000;
-        console.log('x', this.camera.position.x);
-        this.renderer.render(this.scene, this.camera);
-    }
-
     moveCamera(endPos, startPos) {
         // console.log(startPos);
         console.log(this.camera.position);
-        if (this.equalsEndPosition(endPos))
+        if (this.equalsEndPosition(endPos)) {
             clearInterval(this.animationInterval);
-        else {
+            this.animationInterval = null;
+        } else {
             // console.log(this.camera.position);
             this.changePos('x', startPos, endPos);
             this.changePos('y', startPos, endPos);
@@ -165,6 +182,7 @@ class ThreeScene {
     }
 
     setView(dir) {
+        if (this.animationInterval) return;
         let endPos;
 
         switch (dir) {
@@ -183,6 +201,9 @@ class ThreeScene {
             case 'front':
                 endPos = {x: 0, y: 0, z: 5};
                 break;
+            // case 'back':
+            //     endPos = {x: 0, y: 20, z: 0};
+            //     break;
             default:
                 endPos = {x: 0, y: 0, z: 5};
                 break;
@@ -196,5 +217,3 @@ class ThreeScene {
 
     }
 }
-
-// export default ThreeScene;

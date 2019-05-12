@@ -1,18 +1,17 @@
-let cameraMode = false;
-
-const modeSwitch = document.querySelector('#mode-switch');
 const container = document.querySelector('#container');
 
+// const viewCube = window.viewcube = new FOUR.Viewcube('viewcube');
+// viewCube.init();
+
 // nav buttons
+/*
 const topBtn = document.querySelector('#top');
 const bottomBtn = document.querySelector('#bottom');
 const leftBtn = document.querySelector('#left');
-const rightBtn = document.querySelector('#right');
+const rightBtn = document.querySelector('#right');*/
 
 const newScene = new ThreeScene(0xFF0000, container,
     window.innerWidth - 10, window.innerHeight - 10);
-
-modeSwitch.addEventListener('change', toggleMode);
 
 let distance = {
     x: 0,
@@ -21,6 +20,7 @@ let distance = {
 let prevPos;
 
 let counter = 0;
+/*
 topBtn.addEventListener('click', () => {
     console.log('set');
     newScene.setView('top');
@@ -36,36 +36,8 @@ leftBtn.addEventListener('click', () => {
 rightBtn.addEventListener('click', () => {
     console.log('set');
     newScene.setView('right');
-});
+});*/
 
-addObjectTouchEventListeners();
-
-function toggleMode() {
-    cameraMode = !cameraMode;
-    console.log(cameraMode ? 'camera mode on' : 'camera mode off');
-    if (cameraMode) enableCameraMode();
-    else enableObjectMode();
-}
-
-function enableCameraMode() {
-    removeObjectTouchEventListeners();
-    initCameraHandlers();
-}
-
-function enableObjectMode() {
-    addObjectTouchEventListeners();
-}
-
-function addObjectTouchEventListeners() {
-    // Handle object rotation!
-    container.addEventListener("touchstart", onObjectTouch);
-    container.addEventListener("touchend", resetObjectTouch);
-}
-
-function removeObjectTouchEventListeners() {
-    container.removeEventListener('touchstart', onObjectTouch);
-    container.removeEventListener('touchend', resetObjectTouch);
-}
 
 function onObjectTouch(e) {
     console.log(e);

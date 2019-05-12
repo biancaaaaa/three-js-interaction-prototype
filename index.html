@@ -11,16 +11,17 @@
 </head>
 <body>
 
+<!--div id="viewcube"></div-->
 <div id="container"></div>
-<div id="camera">
+<!--div id="camera">
     <label class="switch">
         Switch to camera mode
         <input type="checkbox" id="mode-switch">
         <span class="slider round"></span>
     </label>
 
-</div>
-<div class="controls">
+</div-->
+<!--div class="orbitControls">
     <i id="arrow-down" class="control fas fa-arrow-alt-circle-down"></i>
     <i id="arrow-up" class="control fas fa-arrow-alt-circle-up"></i>
     <i id="arrow-left" class="control fas fa-arrow-alt-circle-left"></i>
@@ -35,11 +36,17 @@
             <div id="bottom" class="cube__face cube__face--bottom">bottom</div>
         </div>
     </div>
-</div>
+</div-->
 
 
 <script type="text/javascript" src="js/three.min.js"></script>
 <script type="text/javascript" src="js/three-scene.js"></script>
+<script type="text/javascript" src="js/OrbitControls.js"></script>
+<script type="text/javascript" src="js/TransformControls.js"></script>
+<script type="text/javascript" src="js/threex.domevents.js"></script>
+<script type="text/javascript" src="js/GLTFLoader.js"></script>
+<script type="text/javascript" src="js/Tween.js"></script>
+<script type="text/javascript" src="js/ViewCube/viewcube.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/orientation-cube.js"></script>
 </body>

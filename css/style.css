@@ -7,6 +7,18 @@ body {
     width: 100vw;
 }
 
+#viewcube {
+    background-color: transparent;
+    border: 1px solid rgba(0,0,0,0.1);
+    height: 340px;
+    overflow: hidden;
+    position: absolute;
+    right: 20px;
+    top: 0;
+    width: 340px;
+    z-index: 500;
+}
+
 canvas {
     height: 100%;
     width: 100%;
