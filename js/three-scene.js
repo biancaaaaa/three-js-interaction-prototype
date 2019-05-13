@@ -9,7 +9,6 @@ class ThreeScene {
     transformControls;
     transformMode = false;
     domEvents;
-    mixers = [];
 
     constructor(color, domElem, width, height) {
         this.scene = new THREE.Scene();
@@ -25,8 +24,6 @@ class ThreeScene {
         this.initTransformController();
         this.renderToDOM(domElem);
         this.renderer.render(this.scene, this.camera);
-        // events
-        // THREEx.WindowResize(this.renderer, this.camera);
         this.animate();
     }
 
@@ -43,15 +40,15 @@ class ThreeScene {
         this.domEvents.addEventListener(this.cube, 'touchstart', this.switchToRotationMode);
     }
 
-    switchToRotationMode() {
-        if (this.transformMode)
-            this.transformControls.detach(this.cube);
-        else
-            this.transformControls.attach(this.cube);
+    switchToRotationMode = () => {
+        if (!this.transformControls) this.initTransformController();
+        // if (this.transformMode)
+        //      this.transformControls.detach(this.cube);
+        // else
+        this.transformControls.attach(this.cube);
 
         this.transformMode = !this.transformMode;
-        console.log('hi');
-    }
+    };
 
     initDOMEvents() {
         this.domEvents = new THREEx.DomEvents(this.camera, this.renderer.domElement);
@@ -102,6 +99,7 @@ class ThreeScene {
             FAR = 2000;
         this.camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
         this.camera.position.z = 5;
+        this.camera.position.y = 5;
     }
 
     initCube(color) {
@@ -117,7 +115,7 @@ class ThreeScene {
 
     animate = () => {
         requestAnimationFrame(this.animate);
-        // console.log(this.camera.position);
+         //console.log(this.camera.position);
         //const speed = Date.now() * 0.0005;
 
         // this.cube.rotation.x += 0.1;
@@ -130,6 +128,7 @@ class ThreeScene {
         //this.camera.lookAt(this.scene.position);
         this.orbitControls.update();
         this.renderer.render(this.scene, this.camera);
+        TWEEN.update();
     };
 
     rotateCube(x, y) {
@@ -137,48 +136,6 @@ class ThreeScene {
         this.cube.rotation.y += x;
 
         this.renderer.render(this.scene, this.camera);
-    }
-
-    moveCamera(endPos, startPos) {
-        // console.log(startPos);
-        console.log(this.camera.position);
-        if (this.equalsEndPosition(endPos)) {
-            clearInterval(this.animationInterval);
-            this.animationInterval = null;
-        } else {
-            // console.log(this.camera.position);
-            this.changePos('x', startPos, endPos);
-            this.changePos('y', startPos, endPos);
-            this.changePos('z', startPos, endPos);
-            this.camera.lookAt(this.scene.position);
-            this.renderer.render(this.scene, this.camera);
-        }
-    }
-
-    changePos(coord, startPos, endPos) {
-        if (!this.equalsEndCoord(coord, startPos, endPos)) {
-            if (this.isSmallerEnd(coord, startPos, endPos)) {
-                if (this.camera.position[coord] < endPos[coord])
-                    this.camera.position[coord] = Number(this.camera.position[coord].toFixed(1)) + 0.1;
-            } else {
-                if (this.camera.position[coord] > endPos[coord])
-                    this.camera.position[coord] = Number(this.camera.position[coord].toFixed(1)) - 0.1;
-            }
-        }
-    }
-
-    equalsEndCoord(coord, startPos, endPos) {
-        return startPos[coord] === endPos[coord];
-    }
-
-    isSmallerEnd(coord, startPos, endPos) {
-        return startPos[coord] < endPos[coord];
-    }
-
-    equalsEndPosition(endPos) {
-        return endPos.x === this.camera.position.x &&
-            endPos.y === this.camera.position.y &&
-            endPos.z === this.camera.position.z;
     }
 
     setView(dir) {
@@ -201,9 +158,9 @@ class ThreeScene {
             case 'front':
                 endPos = {x: 0, y: 0, z: 5};
                 break;
-            // case 'back':
-            //     endPos = {x: 0, y: 20, z: 0};
-            //     break;
+            case 'back':
+                endPos = {x: 0, y: 0, z: -10};
+                break;
             default:
                 endPos = {x: 0, y: 0, z: 5};
                 break;
@@ -212,8 +169,32 @@ class ThreeScene {
         // console.log(endPos);
         const startPos = {...this.camera.position};
 
-        this.animationInterval = setInterval(() =>
-            this.moveCamera(endPos, startPos), 10);
+        // create the tween
+        this.setupTween(new THREE.Vector3(startPos.x, startPos.y, startPos.z),
+            new THREE.Vector3(endPos.x, endPos.y, endPos.z), 600);
 
+    }
+
+    setupTween(position, target, duration) {
+        TWEEN.removeAll();    // remove previous tweens if needed
+
+        const tween = new TWEEN.Tween(position)
+            .to(target, duration)
+            .easing(TWEEN.Easing.Linear.None)
+            .onUpdate(
+                () => {
+                    this.camera.position.copy(position);
+                    this.camera.lookAt(this.scene.position);
+                    this.renderer.render(this.scene, this.camera);
+                    this.orbitControls.update();
+
+                })
+            .onComplete(
+                () => {
+                    this.orbitControls.target.copy(this.scene.position);
+                }
+            );
+        tween.start();
+        console.log(tween);
     }
 }

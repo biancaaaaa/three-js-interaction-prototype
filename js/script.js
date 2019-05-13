@@ -4,11 +4,8 @@ const container = document.querySelector('#container');
 // viewCube.init();
 
 // nav buttons
-/*
-const topBtn = document.querySelector('#top');
-const bottomBtn = document.querySelector('#bottom');
-const leftBtn = document.querySelector('#left');
-const rightBtn = document.querySelector('#right');*/
+
+const navControls = document.querySelectorAll('.nav-control');
 
 const newScene = new ThreeScene(0xFF0000, container,
     window.innerWidth - 10, window.innerHeight - 10);
@@ -20,23 +17,13 @@ let distance = {
 let prevPos;
 
 let counter = 0;
-/*
-topBtn.addEventListener('click', () => {
-    console.log('set');
-    newScene.setView('top');
-});
-bottomBtn.addEventListener('click', () => {
-    console.log('set');
-    newScene.setView('bottom');
-});
-leftBtn.addEventListener('click', () => {
-    console.log('set');
-    newScene.setView('left');
-});
-rightBtn.addEventListener('click', () => {
-    console.log('set');
-    newScene.setView('right');
-});*/
+
+for (let i = 0; i < navControls.length; i++)
+    navControls[i].addEventListener('click', e => {
+        console.log('set');
+        newScene.setView(e.target.id);
+    });
+
 
 
 function onObjectTouch(e) {
