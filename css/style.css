@@ -10,18 +10,41 @@ body {
 #viewcube {
     background-color: transparent;
     border: 1px solid rgba(0,0,0,0.1);
-    height: 340px;
+    height: 30vh;
     overflow: hidden;
     position: absolute;
-    right: 20px;
+    right: 0;
     top: 0;
-    width: 340px;
+    width: 30vh;
     z-index: 500;
+}
+
+.viewcube-controls {
+    position: absolute;
+    right: 0;
+    color: white;
+    z-index: 600;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex.center {
+    justify-content: center;
+}
+
+.flex.space-between {
+    justify-content: space-between;
+}
+
+.flex i {
+    margin: 2px;
 }
 
 .navigation-bar {
     position: absolute;
-    bottom: 10px;
+    bottom: 0;
     left: 0;
     right: 0;
     padding: 10px;

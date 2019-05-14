@@ -29,11 +29,11 @@ class ThreeScene {
 
     initEventListeners() {
         this.domEvents.addEventListener(this.cube, 'mouseover', () => {
-            this.cube.material.color.set(0xa90202);
+            this.cube.material.color.set(0x1f74bf);
         });
 
         this.domEvents.addEventListener(this.cube, 'mouseout', () => {
-            this.cube.material.color.set(0xFF0000);
+            this.cube.material.color.set(0x2d99f9);
         });
 
         this.domEvents.addEventListener(this.cube, 'mousedown', this.switchToRotationMode);
@@ -42,9 +42,9 @@ class ThreeScene {
 
     switchToRotationMode = () => {
         if (!this.transformControls) this.initTransformController();
-        // if (this.transformMode)
-        //      this.transformControls.detach(this.cube);
-        // else
+        if (this.transformMode)
+            this.transformControls.detach(this.cube);
+        else
         this.transformControls.attach(this.cube);
 
         this.transformMode = !this.transformMode;
@@ -115,17 +115,6 @@ class ThreeScene {
 
     animate = () => {
         requestAnimationFrame(this.animate);
-         //console.log(this.camera.position);
-        //const speed = Date.now() * 0.0005;
-
-        // this.cube.rotation.x += 0.1;
-        // this.cube.rotation.y += 0.1;
-
-        //this.camera.position.x = Math.sin(speed) * 10;
-        //this.camera.position.z = Math.cos(speed) * 10;
-        //console.log('y', this.camera.position.x);
-        //console.log('z', this.camera.position.z);
-        //this.camera.lookAt(this.scene.position);
         this.orbitControls.update();
         this.renderer.render(this.scene, this.camera);
         TWEEN.update();
@@ -176,8 +165,6 @@ class ThreeScene {
     }
 
     setupTween(position, target, duration) {
-        TWEEN.removeAll();    // remove previous tweens if needed
-
         const tween = new TWEEN.Tween(position)
             .to(target, duration)
             .easing(TWEEN.Easing.Linear.None)
@@ -195,6 +182,5 @@ class ThreeScene {
                 }
             );
         tween.start();
-        console.log(tween);
     }
 }
