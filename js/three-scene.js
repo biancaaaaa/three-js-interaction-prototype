@@ -4,7 +4,6 @@ class ThreeScene {
     scene;
     cube;
     lights = [];
-    animationInterval;
     orbitControls;
     transformControls;
     transformMode = false;
@@ -120,15 +119,7 @@ class ThreeScene {
         TWEEN.update();
     };
 
-    rotateCube(x, y) {
-        this.cube.rotation.x += y;
-        this.cube.rotation.y += x;
-
-        this.renderer.render(this.scene, this.camera);
-    }
-
     setView(dir) {
-        if (this.animationInterval) return;
         let endPos;
 
         switch (dir) {

@@ -28,8 +28,9 @@ FaceFactory = function (size, color) {
     this.genFace = function (position, rotation, faceDesc) {
         var geo = new THREE.PlaneBufferGeometry(size * 0.70, size * 0.70);
         var midpoint = position.multiplyScalar(size);
-        var mat = new THREE.MeshBasicMaterial({
+        var mat = new THREE.MeshPhongMaterial({
             color: color,
+            map: new THREE.TextureLoader().load('/js/MyViewCube/img/' + faceDesc + '.png'),
             //side: THREE.DoubleSide,
             transparent: true,
             opacity: .75
@@ -39,7 +40,7 @@ FaceFactory = function (size, color) {
         face.rotation.set(rotation.x, rotation.y, rotation.z);
         face.name = faceDesc;
         return face;
-    }
+    };
 
     this.genCorner = function (p1, p2, p3) {
         var v1 = p1.multiplyScalar(size);
@@ -62,7 +63,7 @@ FaceFactory = function (size, color) {
             opacity: .75
         });
         return new THREE.Mesh(geo, mat);
-    }
+    };
 
     this.genEdge = function (p1, p2, p3, p4) {
         var v1 = p1.multiplyScalar(size);
@@ -90,7 +91,7 @@ FaceFactory = function (size, color) {
             opacity: .75
         });
         return new THREE.Mesh(geo, mat);
-    }
+    };
 
     this.genOutline = function () {
         var geo = new THREE.Geometry();
@@ -337,31 +338,7 @@ function onUpdate() {
         hit[0].object.material.opacity = .625;
     }*/
 
-    // Rotate!
-    if (!mouseDown) {
-        // viewcube.rotation.x += 0 * Math.PI / 180;
-        // viewcube.rotation.y += .25 * Math.PI / 180;
-    }
 }
-
-// Get mouse position
-var mousePosition = new THREE.Vector2(1, 1);
-
-function onMouseMove(e) {
-    mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1;
-    mousePosition.y = -(e.clientY / window.innerHeight) * 2 + 1;
-}
-
-document.addEventListener('mousemove', onMouseMove);
-
-// Get mouse up and down
-var mouseDown = false;
-document.addEventListener('mousedown', function () {
-    mouseDown = true;
-});
-document.addEventListener('mouseup', function () {
-    mouseDown = false;
-});
 
 // Render event loop
 function render() {
