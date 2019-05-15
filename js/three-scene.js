@@ -8,6 +8,7 @@ class ThreeScene {
     transformControls;
     transformMode = false;
     domEvents;
+    exitBtn = document.getElementById('exit-rotation');
 
     constructor(color, domElem, width, height) {
         this.scene = new THREE.Scene();
@@ -37,16 +38,21 @@ class ThreeScene {
 
         this.domEvents.addEventListener(this.cube, 'mousedown', this.switchToRotationMode);
         this.domEvents.addEventListener(this.cube, 'touchstart', this.switchToRotationMode);
+        // this.domEvents.addEventListener(this.scene, 'mousedown', this.exitRotationMode);
+        this.exitBtn.addEventListener('mousedown', this.exitRotationMode);
     }
 
     switchToRotationMode = () => {
         if (!this.transformControls) this.initTransformController();
-        if (this.transformMode)
-            this.transformControls.detach(this.cube);
-        else
         this.transformControls.attach(this.cube);
+        this.exitBtn.style.display = 'block';
+        this.transformMode = true;
+    };
 
-        this.transformMode = !this.transformMode;
+    exitRotationMode = () => {
+        this.transformControls.detach(this.cube);
+        this.transformMode = false;
+        this.exitBtn.style.display = 'none';
     };
 
     initDOMEvents() {
@@ -120,38 +126,47 @@ class ThreeScene {
     };
 
     setView(dir) {
-        let endPos;
-
-        switch (dir) {
-            case 'top':
-                endPos = {x: 0, y: 10, z: 0};
-                break;
-            case 'bottom':
-                endPos = {x: 0, y: -10, z: 0};
-                break;
-            case 'left':
-                endPos = {x: -10, y: 0, z: 0};
-                break;
-            case 'right':
-                endPos = {x: 10, y: 0, z: 0};
-                break;
-            case 'front':
-                endPos = {x: 0, y: 0, z: 5};
-                break;
-            case 'back':
-                endPos = {x: 0, y: 0, z: -10};
-                break;
-            default:
-                endPos = {x: 0, y: 0, z: 5};
-                break;
-        }
+        const camDirections = {
+            top: new THREE.Vector3(0, 10, 0),
+            bottom: new THREE.Vector3(0, -10, 0),
+            left: new THREE.Vector3(-10, 0, 0),
+            right: new THREE.Vector3(10, 0, 0),
+            front: new THREE.Vector3(0, 0, 5),
+            back: new THREE.Vector3(0, 0, -10),
+            home: new THREE.Vector3(0, 5, 5),
+            // CORNERS
+            frt: new THREE.Vector3(2, 2, 2), // front right top
+            flt: new THREE.Vector3(-2, 2, 2), // front left top
+            brt: new THREE.Vector3(2, 2, -2), // back right top
+            blt: new THREE.Vector3(-2, 2, -2), // back left top
+            frb: new THREE.Vector3(2, -2, 2), // front right bottom
+            flb: new THREE.Vector3(-2, -2, 2), // front left bottom
+            brb: new THREE.Vector3(2, -2, -2), // back right bottom
+            blb: new THREE.Vector3(-2, -2, -2), // back left bottom
+            // EDGES
+            // top
+            rt: new THREE.Vector3(5, 2, 0), // right top
+            lt: new THREE.Vector3(-5, 2, 0), // left top
+            ft: new THREE.Vector3(0, 2, 5), // front top
+            bt: new THREE.Vector3(0, 2, -5), // back top
+            // mid
+            fr: new THREE.Vector3(2, 0, 2), // front right
+            fl: new THREE.Vector3(-2, 0, 2), // front left
+            br: new THREE.Vector3(2, 0, -2), // back right
+            bl: new THREE.Vector3(-2, 0, -2), // back left
+            // bottom
+            rb: new THREE.Vector3(5, -2, 0), // right bottom
+            lb: new THREE.Vector3(-5, -2, 0), // left bottom
+            fb: new THREE.Vector3(0, -2, 5), // front bottom
+            bb: new THREE.Vector3(0, -2, -5), // back bottom
+        };
 
         // console.log(endPos);
         const startPos = {...this.camera.position};
 
         // create the tween
         this.setupTween(new THREE.Vector3(startPos.x, startPos.y, startPos.z),
-            new THREE.Vector3(endPos.x, endPos.y, endPos.z), 600);
+            camDirections[dir], 600);
 
     }
 

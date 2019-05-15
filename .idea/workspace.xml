@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/js/three-scene.js" line="161" mnemonic="7" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="fcee9c49-bc49-4dfe-9150-91015f01d0e7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/js/MyViewCube/img/back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/MyViewCube/img/bottom.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/MyViewCube/img/front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/MyViewCube/img/left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/MyViewCube/img/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/MyViewCube/img/threejs-viewcube.xcf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/MyViewCube/img/top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/babel-config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gulpfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prototype.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prototype.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/GLTFLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/three/GLTFLoader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/MyViewCube/my-viewcube.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/MyViewCube/my-viewcube.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/orientation-cube.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/OrbitControls.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/three/OrbitControls.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/TransformControls.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/three/TransformControls.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Tween.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/tween/Tween.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/three-scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/three-scene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/three.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/three/three.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/three.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/three/three.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/three.module.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/three/three.module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/threex.domevents.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/threex/threex.domevents.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+            <state relative-caret-position="7">
+              <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -40,17 +48,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+            <state relative-caret-position="765">
+              <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="680">
+              <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -58,26 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/MyViewCube/my-viewcube.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/ViewCube/viewcube.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="298" column="51" selection-start-line="298" selection-start-column="34" selection-end-line="298" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/three.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-253">
-              <caret line="39714" column="37" selection-start-line="39714" selection-start-column="24" selection-end-line="39714" selection-end-column="37" />
+            <state relative-caret-position="247">
+              <caret line="370" column="52" selection-start-line="370" selection-start-column="52" selection-end-line="370" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -85,17 +75,44 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/three-scene.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1469">
-              <caret line="119" column="6" selection-start-line="119" selection-start-column="6" selection-end-line="119" selection-end-column="6" />
+            <state relative-caret-position="279">
+              <caret line="125" column="6" selection-start-line="125" selection-start-column="6" selection-end-line="125" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/TransformControls.js">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7582">
-              <caret line="446" selection-start-line="446" selection-end-line="446" />
+            <state relative-caret-position="34">
+              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/babel-config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="53" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gulpfile.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="466">
+              <caret line="35" column="3" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -139,11 +156,16 @@
         <option value="&lt;e2b61162-dd2a-4a02-ae87-1971c4b0e393&gt;/js/three-scene.js" />
         <option value="$PROJECT_DIR$/js/Tween.js" />
         <option value="$PROJECT_DIR$/js/ViewCube/viewcube.js" />
-        <option value="$PROJECT_DIR$/js/three-scene.js" />
-        <option value="$PROJECT_DIR$/js/MyViewCube/my-viewcube.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/js/script.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/js/MyViewCube/my-viewcube.js" />
+        <option value="$PROJECT_DIR$/js/three-scene.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/gulpfile.js" />
+        <option value="$PROJECT_DIR$/babel-config.js" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -159,7 +181,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -181,20 +202,7 @@
               <item name="prototype" type="b2602c69:ProjectViewProjectNode" />
               <item name="prototype" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="MyViewCube" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prototype" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prototype" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="MyViewCube" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="prototype" type="b2602c69:ProjectViewProjectNode" />
-              <item name="prototype" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="ViewCube" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="prototype" type="b2602c69:ProjectViewProjectNode" />
@@ -205,6 +213,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -223,6 +232,11 @@
     <property name="settings.editor.selected.configurable" value="reference.settings.deploy.options" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Bianca_neu\WebstormProjects\prototype\js\three" />
+      <recent name="C:\Users\Bianca_neu\WebstormProjects\prototype\js\tween" />
+      <recent name="C:\Users\Bianca_neu\WebstormProjects\prototype\js\threex" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Bianca_neu\WebstormProjects\prototype\js\MyViewCube" />
       <recent name="C:\Users\Bianca_neu\WebstormProjects\prototype\js" />
@@ -258,18 +272,19 @@
       <workItem from="1557729711955" duration="5832000" />
       <workItem from="1557752119157" duration="6094000" />
       <workItem from="1557817430593" duration="38000" />
-      <workItem from="1557828358332" duration="4718000" />
+      <workItem from="1557828358332" duration="8514000" />
+      <workItem from="1557906010542" duration="6329000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80077000" />
+    <option name="totallyTimeSpent" value="90202000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16263238" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16490166" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -282,7 +297,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="File Transfer" order="9" weight="0.32242227" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.2700491" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2700491" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -294,10 +309,10 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/three.min.js">
+    <entry file="file://$PROJECT_DIR$/js/three/three.min.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/Tween.js">
+    <entry file="file://$PROJECT_DIR$/js/tween/Tween.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15572">
           <caret line="916" column="9" selection-start-line="916" selection-start-column="9" selection-end-line="916" selection-end-column="9" />
@@ -305,81 +320,95 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/TextureLoader.js" />
-    <entry file="file://$PROJECT_DIR$/js/DragControls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1003">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/TransformControls.js">
+    <entry file="file://$PROJECT_DIR$/js/DragControls.js" />
+    <entry file="file://$PROJECT_DIR$/js/three/TransformControls.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7582">
           <caret line="446" selection-start-line="446" selection-end-line="446" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/orientation-cube.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/three.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-253">
-          <caret line="39714" column="37" selection-start-line="39714" selection-start-column="24" selection-end-line="39714" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/three-scene.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1469">
-          <caret line="119" column="6" selection-start-line="119" selection-start-column="6" selection-end-line="119" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/ViewCube/viewcube.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="298" column="51" selection-start-line="298" selection-start-column="34" selection-end-line="298" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/js/orientation-cube.js" />
+    <entry file="file://$PROJECT_DIR$/js/ViewCube/viewcube.js" />
     <entry file="file://$PROJECT_DIR$/js/MyViewCube/img/front.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/js/MyViewCube/img/right.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/MyViewCube/my-viewcube.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+        <state relative-caret-position="765">
+          <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/three/three.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="39714" column="37" selection-start-line="39714" selection-start-column="24" selection-end-line="39714" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/MyViewCube/my-viewcube.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="370" column="52" selection-start-line="370" selection-start-column="52" selection-end-line="370" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7">
+          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/script.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/three-scene.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="125" column="6" selection-start-line="125" selection-start-column="6" selection-end-line="125" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/dist/script.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babel-config.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <caret line="4" column="53" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="35" column="3" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="3" />
         </state>
       </provider>
     </entry>

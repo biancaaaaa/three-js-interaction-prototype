@@ -1,7 +1,6 @@
 // inspired by https://codepen.io/XanderLuciano/pen/jwELMW
 
 var domEl = document.getElementById('viewcube');
-console.log(domEl);
 var scene = new THREE.Scene();
 
 var fov = 75;
@@ -9,8 +8,7 @@ var aspect = 1;
 var near = 0.1;
 var far = 1000;
 var camera = new THREE.OrthographicCamera(domEl.offsetWidth / -50, domEl.offsetWidth  / 50, domEl.offsetHeight  / 50, domEl.offsetHeight  / -50, near, far); //(fov, aspect, near, far);
-//new THREE.OrthographicCamera( window.innerWidth / - 50, window.innerWidth / 50, window.innerHeight / 50, window.innerHeight / -50, - 500, 1000);
-camera.position.setZ(5);
+camera.position.set(0, 0, 5);
 
 var light = new THREE.HemisphereLight(0xffffff, 0x666666, 2.75);
 light.position.set(0, 10, 10);
@@ -42,7 +40,7 @@ FaceFactory = function (size, color) {
         return face;
     };
 
-    this.genCorner = function (p1, p2, p3) {
+    this.genCorner = function (p1, p2, p3, desc) {
         var v1 = p1.multiplyScalar(size);
         var v2 = p2.multiplyScalar(size);
         var v3 = p3.multiplyScalar(size);
@@ -62,10 +60,12 @@ FaceFactory = function (size, color) {
             transparent: true,
             opacity: .75
         });
-        return new THREE.Mesh(geo, mat);
+        var corner = new THREE.Mesh(geo, mat);
+        corner.name = desc;
+        return corner;
     };
 
-    this.genEdge = function (p1, p2, p3, p4) {
+    this.genEdge = function (p1, p2, p3, p4, desc) {
         var v1 = p1.multiplyScalar(size);
         var v2 = p2.multiplyScalar(size);
         var v3 = p3.multiplyScalar(size);
@@ -90,7 +90,9 @@ FaceFactory = function (size, color) {
             transparent: true,
             opacity: .75
         });
-        return new THREE.Mesh(geo, mat);
+        var edge = new THREE.Mesh(geo, mat);
+        edge.name = desc;
+        return edge;
     };
 
     this.genOutline = function () {
@@ -212,7 +214,7 @@ FaceFactory = function (size, color) {
         });
         return new THREE.LineSegments(geo, mat);
     }
-}
+};
 FaceFactory.prototype.constructor = FaceFactory;
 
 var domEvents = new THREEx.DomEvents(camera, renderer.domElement);
@@ -238,52 +240,52 @@ var bottom = faces.genFace(new THREE.Vector3(0, -.50, 0), new THREE.Vector3(90 *
 vc.add(bottom);
 
 // ViewCube Corners
-var c_FRT = faces.genCorner(new THREE.Vector3(0.50, 0.35, 0.35), new THREE.Vector3(0.35, 0.50, 0.35), new THREE.Vector3(0.35, 0.35, 0.50));
+var c_FRT = faces.genCorner(new THREE.Vector3(0.50, 0.35, 0.35), new THREE.Vector3(0.35, 0.50, 0.35), new THREE.Vector3(0.35, 0.35, 0.50), 'frt');
 vc.add(c_FRT);
-var c_FLT = faces.genCorner(new THREE.Vector3(-.35, 0.35, 0.50), new THREE.Vector3(-.35, 0.50, 0.35), new THREE.Vector3(-.50, 0.35, 0.35));
+var c_FLT = faces.genCorner(new THREE.Vector3(-.35, 0.35, 0.50), new THREE.Vector3(-.35, 0.50, 0.35), new THREE.Vector3(-.50, 0.35, 0.35), 'flt');
 vc.add(c_FLT);
-var c_BRT = faces.genCorner(new THREE.Vector3(0.35, 0.35, -.50), new THREE.Vector3(0.35, 0.50, -.35), new THREE.Vector3(0.50, 0.35, -.35));
+var c_BRT = faces.genCorner(new THREE.Vector3(0.35, 0.35, -.50), new THREE.Vector3(0.35, 0.50, -.35), new THREE.Vector3(0.50, 0.35, -.35), 'brt');
 vc.add(c_BRT);
-var c_BLT = faces.genCorner(new THREE.Vector3(-.50, 0.35, -.35), new THREE.Vector3(-.35, 0.50, -.35), new THREE.Vector3(-.35, 0.35, -.50));
+var c_BLT = faces.genCorner(new THREE.Vector3(-.50, 0.35, -.35), new THREE.Vector3(-.35, 0.50, -.35), new THREE.Vector3(-.35, 0.35, -.50), 'blt');
 vc.add(c_BLT);
-var c_FRB = faces.genCorner(new THREE.Vector3(0.35, -.35, 0.50), new THREE.Vector3(0.35, -.50, 0.35), new THREE.Vector3(0.50, -.35, 0.35));
+var c_FRB = faces.genCorner(new THREE.Vector3(0.35, -.35, 0.50), new THREE.Vector3(0.35, -.50, 0.35), new THREE.Vector3(0.50, -.35, 0.35), 'frb');
 vc.add(c_FRB);
-var c_FLB = faces.genCorner(new THREE.Vector3(-.50, -.35, 0.35), new THREE.Vector3(-.35, -.50, 0.35), new THREE.Vector3(-.35, -.35, 0.50));
+var c_FLB = faces.genCorner(new THREE.Vector3(-.50, -.35, 0.35), new THREE.Vector3(-.35, -.50, 0.35), new THREE.Vector3(-.35, -.35, 0.50), 'flb');
 vc.add(c_FLB);
-var c_BRB = faces.genCorner(new THREE.Vector3(0.50, -.35, -.35), new THREE.Vector3(0.35, -.50, -.35), new THREE.Vector3(0.35, -.35, -.50));
+var c_BRB = faces.genCorner(new THREE.Vector3(0.50, -.35, -.35), new THREE.Vector3(0.35, -.50, -.35), new THREE.Vector3(0.35, -.35, -.50), 'brb');
 vc.add(c_BRB);
-var c_BLB = faces.genCorner(new THREE.Vector3(-.35, -.35, -.50), new THREE.Vector3(-.35, -.50, -.35), new THREE.Vector3(-.50, -.35, -.35));
+var c_BLB = faces.genCorner(new THREE.Vector3(-.35, -.35, -.50), new THREE.Vector3(-.35, -.50, -.35), new THREE.Vector3(-.50, -.35, -.35), 'blb');
 vc.add(c_BLB);
 
 // ViewCube Edges
 // Top
-var e_RT = faces.genEdge(new THREE.Vector3(0.35, 0.50, 0.35), new THREE.Vector3(0.50, 0.35, 0.35), new THREE.Vector3(0.50, 0.35, -.35), new THREE.Vector3(0.35, 0.50, -.35));
+var e_RT = faces.genEdge(new THREE.Vector3(0.35, 0.50, 0.35), new THREE.Vector3(0.50, 0.35, 0.35), new THREE.Vector3(0.50, 0.35, -.35), new THREE.Vector3(0.35, 0.50, -.35), 'rt');
 vc.add(e_RT);
-var e_LT = faces.genEdge(new THREE.Vector3(-.35, 0.50, -.35), new THREE.Vector3(-.50, 0.35, -.35), new THREE.Vector3(-.50, 0.35, 0.35), new THREE.Vector3(-.35, 0.50, 0.35));
+var e_LT = faces.genEdge(new THREE.Vector3(-.35, 0.50, -.35), new THREE.Vector3(-.50, 0.35, -.35), new THREE.Vector3(-.50, 0.35, 0.35), new THREE.Vector3(-.35, 0.50, 0.35), 'lt');
 vc.add(e_LT);
-var e_FT = faces.genEdge(new THREE.Vector3(-.35, 0.35, 0.50), new THREE.Vector3(0.35, 0.35, 0.50), new THREE.Vector3(0.35, 0.50, 0.35), new THREE.Vector3(-.35, 0.50, 0.35));
+var e_FT = faces.genEdge(new THREE.Vector3(-.35, 0.35, 0.50), new THREE.Vector3(0.35, 0.35, 0.50), new THREE.Vector3(0.35, 0.50, 0.35), new THREE.Vector3(-.35, 0.50, 0.35), 'ft');
 vc.add(e_FT);
-var e_BT = faces.genEdge(new THREE.Vector3(-.35, 0.50, -.35), new THREE.Vector3(0.35, 0.50, -.35), new THREE.Vector3(0.35, 0.35, -.50), new THREE.Vector3(-.35, 0.35, -.50));
+var e_BT = faces.genEdge(new THREE.Vector3(-.35, 0.50, -.35), new THREE.Vector3(0.35, 0.50, -.35), new THREE.Vector3(0.35, 0.35, -.50), new THREE.Vector3(-.35, 0.35, -.50), 'bt');
 vc.add(e_BT);
 
 // Mid
-var e_FR = faces.genEdge(new THREE.Vector3(0.35, -.35, 0.50), new THREE.Vector3(0.50, -.35, 0.35), new THREE.Vector3(0.50, 0.35, 0.35), new THREE.Vector3(0.35, 0.35, 0.50));
+var e_FR = faces.genEdge(new THREE.Vector3(0.35, -.35, 0.50), new THREE.Vector3(0.50, -.35, 0.35), new THREE.Vector3(0.50, 0.35, 0.35), new THREE.Vector3(0.35, 0.35, 0.50), 'fr');
 vc.add(e_FR);
-var e_FL = faces.genEdge(new THREE.Vector3(-.35, 0.35, 0.50), new THREE.Vector3(-.50, 0.35, 0.35), new THREE.Vector3(-.50, -.35, 0.35), new THREE.Vector3(-.35, -.35, 0.50));
+var e_FL = faces.genEdge(new THREE.Vector3(-.35, 0.35, 0.50), new THREE.Vector3(-.50, 0.35, 0.35), new THREE.Vector3(-.50, -.35, 0.35), new THREE.Vector3(-.35, -.35, 0.50), 'fl');
 vc.add(e_FL);
-var e_BR = faces.genEdge(new THREE.Vector3(0.35, 0.35, -.50), new THREE.Vector3(0.50, 0.35, -.35), new THREE.Vector3(0.50, -.35, -.35), new THREE.Vector3(0.35, -.35, -.50));
+var e_BR = faces.genEdge(new THREE.Vector3(0.35, 0.35, -.50), new THREE.Vector3(0.50, 0.35, -.35), new THREE.Vector3(0.50, -.35, -.35), new THREE.Vector3(0.35, -.35, -.50), 'br');
 vc.add(e_BR);
-var e_BL = faces.genEdge(new THREE.Vector3(-.35, -.35, -.50), new THREE.Vector3(-.50, -.35, -.35), new THREE.Vector3(-.50, 0.35, -.35), new THREE.Vector3(-.35, 0.35, -.50));
+var e_BL = faces.genEdge(new THREE.Vector3(-.35, -.35, -.50), new THREE.Vector3(-.50, -.35, -.35), new THREE.Vector3(-.50, 0.35, -.35), new THREE.Vector3(-.35, 0.35, -.50), 'bl');
 vc.add(e_BL);
 
 // Bottom
-var e_RB = faces.genEdge(new THREE.Vector3(0.35, -.50, -.35), new THREE.Vector3(0.50, -.35, -.35), new THREE.Vector3(0.50, -.35, 0.35), new THREE.Vector3(0.35, -.50, 0.35));
+var e_RB = faces.genEdge(new THREE.Vector3(0.35, -.50, -.35), new THREE.Vector3(0.50, -.35, -.35), new THREE.Vector3(0.50, -.35, 0.35), new THREE.Vector3(0.35, -.50, 0.35), 'rb');
 vc.add(e_RB);
-var e_LB = faces.genEdge(new THREE.Vector3(-.35, -.50, 0.35), new THREE.Vector3(-.50, -.35, 0.35), new THREE.Vector3(-.50, -.35, -.35), new THREE.Vector3(-.35, -.50, -.35));
+var e_LB = faces.genEdge(new THREE.Vector3(-.35, -.50, 0.35), new THREE.Vector3(-.50, -.35, 0.35), new THREE.Vector3(-.50, -.35, -.35), new THREE.Vector3(-.35, -.50, -.35), 'lb');
 vc.add(e_LB);
-var e_FB = faces.genEdge(new THREE.Vector3(-.35, -.50, 0.35), new THREE.Vector3(0.35, -.50, 0.35), new THREE.Vector3(0.35, -.35, 0.50), new THREE.Vector3(-.35, -.35, 0.50));
+var e_FB = faces.genEdge(new THREE.Vector3(-.35, -.50, 0.35), new THREE.Vector3(0.35, -.50, 0.35), new THREE.Vector3(0.35, -.35, 0.50), new THREE.Vector3(-.35, -.35, 0.50), 'fb');
 vc.add(e_FB);
-var e_BB = faces.genEdge(new THREE.Vector3(-.35, -.35, -.50), new THREE.Vector3(0.35, -.35, -.50), new THREE.Vector3(0.35, -.50, -.35), new THREE.Vector3(-.35, -.50, -.35));
+var e_BB = faces.genEdge(new THREE.Vector3(-.35, -.35, -.50), new THREE.Vector3(0.35, -.35, -.50), new THREE.Vector3(0.35, -.50, -.35), new THREE.Vector3(-.35, -.50, -.35), 'bb');
 vc.add(e_BB);
 
 // ViewCube Outline
@@ -291,7 +293,7 @@ var outline = faces.genOutline();
 viewcube.add(outline);
 viewcube.add(vc);
 
-viewcube.rotation.x = 45 * Math.PI / 180;
+// viewcube.rotation.x = 45 * Math.PI / 180;
 
 scene.add(viewcube);
 
@@ -312,38 +314,21 @@ for (var i = 0, j = vc.children.length; i < j; i++) {
         e.target.material.color = new THREE.Color(0x2196f3);
         e.target.material.opacity = .75;
     });
-    domEvents.addEventListener(vc.children[i], 'click', function (e) {
+    domEvents.addEventListener(vc.children[i], 'mousedown', function (e) {
+        // newScene.setView(e.target.name);
         console.log(e.target.name);
-        newScene.setView(e.target.name);
+        setupTween({...camera.position}, camDirections[e.target.name], 600, e.target.name);
+    });
+    domEvents.addEventListener(vc.children[i], 'touchstart', function (e) {
+        // newScene.setView(e.target.name);
+        setupTween({...camera.position}, camDirections[e.target.name], 600, e.target.name);
     });
 }
 
 
-var raycaster = new THREE.Raycaster();
-var hit = [];
-
-function onUpdate() {
-
-    /*
-    for (var i=0, j=vc.children.length; i<j; i++) {
-        vc.children[i].material.color = new THREE.Color(0x64B5F6);
-        vc.children[i].material.opacity = .8;
-    }
-
-    // Raycasting
-    raycaster.setFromCamera(mousePosition, camera);
-    hit = raycaster.intersectObjects(vc.children);
-    if (hit.length > 0) {
-        hit[0].object.material.color = new THREE.Color(0x607D8B);
-        hit[0].object.material.opacity = .625;
-    }*/
-
-}
-
 // Render event loop
 function render() {
     requestAnimationFrame(render);
-    onUpdate();
     TWEEN.update();
     renderer.render(scene, camera);
 }
@@ -355,54 +340,45 @@ var camDirections = {
     top: new THREE.Vector3(0, 10, 0),
     bottom: new THREE.Vector3(0, -10, 0),
     left: new THREE.Vector3(-10, 0, 5),
-    right: new THREE.Vector3(10, 0, 5),
+    right: new THREE.Vector3(25, 0, 5),
     front: new THREE.Vector3(0, 0, 5),
-    back: new THREE.Vector3(0, 0, -10)
+    back: new THREE.Vector3(0, 0, -10),
+    home: new THREE.Vector3(0, 5, 5),
+    // CORNERS
+    frt: new THREE.Vector3(2, 2, 2), // front right top
+    flt: new THREE.Vector3(-2, 2, 2), // front left top
+    brt: new THREE.Vector3(2, 2, -2), // back right top
+    blt: new THREE.Vector3(-2, 2, -2), // back left top
+    frb: new THREE.Vector3(2, -2, 2), // front right bottom
+    flb: new THREE.Vector3(-2, -2, 2), // front left bottom
+    brb: new THREE.Vector3(2, -2, -2), // back right bottom
+    blb: new THREE.Vector3(-2, -2, -2), // back left bottom
+    // EDGES
+    // top
+    rt: new THREE.Vector3(5, 2, 0), // right top
+    lt: new THREE.Vector3(-5, 2, 0), // left top
+    ft: new THREE.Vector3(0, 2, 5), // front top
+    bt: new THREE.Vector3(0, 2, -5), // back top
+    // mid
+    fr: new THREE.Vector3(2, 0, 2), // front right
+    fl: new THREE.Vector3(-2, 0, 2), // front left
+    br: new THREE.Vector3(2, 0, -2), // back right
+    bl: new THREE.Vector3(-2, 0, -2), // back left
+    // bottom
+    rb: new THREE.Vector3(5, -2, 0), // right bottom
+    lb: new THREE.Vector3(-5, -2, 0), // left bottom
+    fb: new THREE.Vector3(0, -2, 5), // front bottom
+    bb: new THREE.Vector3(0, -2, -5), // back bottom
 };
 
-var xArray = ['front', 'right', 'back', 'left'];
-var yArray = ['front', 'top', 'back', 'bottom'];
+// camera.position.set(camDirections.home);
+// camera.lookAt(scene.position);
+// renderer.render(scene, camera);
+// setupTween({...camera.position}, camDirections.home, 600, 'home');
 
-var xPos = 0;
-var yPos = 0;
-
-// CUBE CONTROLS
-var viewCubeControls = document.querySelectorAll('.control');
-viewCubeControls.forEach(function (control) {
-    control.addEventListener('click', function (e) {
-        console.log(e.target.id);
-        var direction = '';
-        switch (e.target.id) {
-            case 'arrow-left':
-                if (xPos > 0) xPos--;
-                else xPos = xArray.length - 1;
-
-                direction = xArray[xPos];
-                break;
-            case 'arrow-right':
-                if (xPos < xArray.length - 1) xPos++;
-                else xPos = 0;
-                direction = xArray[xPos];
-                break;
-            case 'arrow-down':
-                if (yPos < yArray.length - 1) yPos++;
-                else yPos = 0;
-                direction = yArray[yPos];
-                break;
-            case 'arrow-up':
-                if (yPos > 0) yPos--;
-                else yPos = yArray.length - 1;
-                direction = yArray[yPos];
-                break;
-            default:
-                break;
-
-        }
-        console.log(camera);
-        setupTween({...camera.position}, camDirections[direction], 600, direction);
-    });
-});
-
+function setViewCubePosition(direction) {
+    setupTween({...camera.position}, camDirections[direction], 600, direction);
+}
 
 function setupTween(position, target, duration, direction) {
     // TWEEN.removeAll();    // remove previous tweens if needed
@@ -417,11 +393,6 @@ function setupTween(position, target, duration, direction) {
             camera.lookAt(scene.position);
             renderer.render(scene, camera);
 
-        })
-        .onComplete(function () {
-                console.log('done');
-            }
-        );
+        });
     tween.start();
-    console.log(tween);
 }

@@ -42,6 +42,13 @@ body {
     margin: 2px;
 }
 
+#exit-rotation {
+    display: none;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
 canvas {
     height: 100%;
     width: 100%;
