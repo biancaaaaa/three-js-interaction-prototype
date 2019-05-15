@@ -297,12 +297,6 @@ viewcube.add(vc);
 
 scene.add(viewcube);
 
-function rotateObject(object, degreeX = 0, degreeY = 0, degreeZ = 0) {
-    object.rotateX(THREE.Math.degToRad(degreeX));
-    object.rotateY(THREE.Math.degToRad(degreeY));
-    object.rotateZ(THREE.Math.degToRad(degreeZ));
-}
-
 // EVENT LISTENERS FACES
 for (var i = 0, j = vc.children.length; i < j; i++) {
     domEvents.addEventListener(vc.children[i], 'mouseover', function (e) {
@@ -317,11 +311,11 @@ for (var i = 0, j = vc.children.length; i < j; i++) {
     domEvents.addEventListener(vc.children[i], 'mousedown', function (e) {
         // newScene.setView(e.target.name);
         console.log(e.target.name);
-        setupTween({...camera.position}, camDirections[e.target.name], 600, e.target.name);
+        setupTween(new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z), camDirections[e.target.name], 600, e.target.name);
     });
     domEvents.addEventListener(vc.children[i], 'touchstart', function (e) {
         // newScene.setView(e.target.name);
-        setupTween({...camera.position}, camDirections[e.target.name], 600, e.target.name);
+        setupTween(new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z), camDirections[e.target.name], 600, e.target.name);
     });
 }
 
@@ -377,7 +371,7 @@ var camDirections = {
 // setupTween({...camera.position}, camDirections.home, 600, 'home');
 
 function setViewCubePosition(direction) {
-    setupTween({...camera.position}, camDirections[direction], 600, direction);
+    setupTween(new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z), camDirections[direction], 600, direction);
 }
 
 function setupTween(position, target, duration, direction) {
